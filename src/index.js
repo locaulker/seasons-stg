@@ -3,21 +3,12 @@ import ReactDOM from "react-dom"
 
 // Class component
 class App extends React.Component {
-  // eslint-disable-next-line no-useless-constructor
-  constructor(props) {
-    super(props)
+  state = { lat: null, errorMessage: "" }
 
-    // We define the initial state of our component
-    this.state = { lat: null, errorMessage: "" }
-
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // We call setState to update our state
-        this.setState({ lat: position.coords.latitude })
-      },
-      (err) => {
-        this.setState({ errorMessage: err.message })
-      }
+      (position) => this.setState({ lat: position.coords.latitude }),
+      (err) => this.setState({ errorMessage: err.message })
     )
   }
 
